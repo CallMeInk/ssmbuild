@@ -31,4 +31,15 @@ public class BookController {
         return "allBook";
     }
 
+    @RequestMapping("/toAddBook")
+    public String toAddPager(){
+        return "addBook";
+    }
+
+    @RequestMapping("/addBook")
+    public String addBook(Books books){
+        bookService.addBook(books);
+        return "redirect:/book/allBook";
+    }
+
 }
