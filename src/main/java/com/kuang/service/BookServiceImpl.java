@@ -3,14 +3,17 @@ package com.kuang.service;
 import com.kuang.dao.BookMapper;
 import com.kuang.pojo.Books;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 public class BookServiceImpl implements BookService {
 
     //service 调用dao层
-    @Resource
     private BookMapper bookMapper;
+
+
+    public void setBookMapper(BookMapper bookMapper) {
+        this.bookMapper = bookMapper;
+    }
 
     public int addBook(Books books) {
         return bookMapper.addBook(books);
