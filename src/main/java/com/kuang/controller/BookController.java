@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @Controller
@@ -39,6 +39,25 @@ public class BookController {
     @RequestMapping("/addBook")
     public String addBook(Books books){
         bookService.addBook(books);
+        return "redirect:/book/allBook";
+    }
+
+    @RequestMapping("/updateBook")
+    public String updateBook(Books books){
+        bookService.updateBook(books);
+        return "redirect:/book/allBook";
+    }
+
+    @RequestMapping("/toUpdate")
+    public String toUpdatePager(int id, Model model){
+        Books books = bookService.queryBookById(id);
+        model.addAttribute("books", books);
+        return "updateBook";
+    }
+
+    @RequestMapping("/deleteBook/{bookId}")
+    public String deleteBook(@PathVariable("bookId") int id){
+        bookService.deleteBookById(id);
         return "redirect:/book/allBook";
     }
 
